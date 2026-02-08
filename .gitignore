@@ -1,0 +1,17 @@
+**/__pycache__/
+**/*.pyc
+**/*.pyo
+**/*.pyd
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.swp
+*.swo
+*.swn
+*.swap
+*.swapfile
+*.swop
+*.swn
+*.swo
+*.swn

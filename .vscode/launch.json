@@ -12,7 +12,14 @@
             "console": "integratedTerminal",
             "args": [
                 "/Users/JohnWilliams/imgs/P101E0456.png"],
-            
+
+        },
+        {
+            "name": "Photo Tagger Web App",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "src.photo_tagger.app",
+            "console": "integratedTerminal"
         }
     ]
 }
