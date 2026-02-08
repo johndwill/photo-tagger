@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.backends._legacy:_Backend"
+
+[project]
+name = "photo-tagger"
+version = "0.1.0"
+description = "Overlay EXIF location and capture time on photos"
+requires-python = ">=3.10"
+dependencies = [
+    "Pillow>=10.0.0",
+    "exifread>=3.0.0",
+    "geopy>=2.4.0",
+    "Flask>=3.0.0",
+]
+
+[project.scripts]
+photo-tagger = "photo_tagger.tagger:_cli_main"
+photo-tagger-web = "photo_tagger.app:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]

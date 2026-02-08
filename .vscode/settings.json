@@ -1,0 +1,10 @@
+{
+    "python.defaultInterpreterPath": "/Users/JohnWilliams/code/photo-tagger/.venv/bin/python",
+    "editor.defaultFormatter": "ms-python.python",
+    "python.formatting.provider": "black",
+    "python.formatting.blackPath": "/Users/JohnWilliams/code/photo-tagger/.venv/bin/black",
+    "editor.formatOnSave": true,
+    "[python]": {
+        "editor.defaultFormatter": "ms-python.black-formatter"
+    }
+}
