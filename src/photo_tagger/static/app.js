@@ -136,6 +136,14 @@ function renderGrid() {
         badge.textContent = img.tagged ? "Tagged" : "Untagged";
         info.appendChild(badge);
 
+        if (img.tagged) {
+            const untagBtn = document.createElement("button");
+            untagBtn.className = "untag-btn";
+            untagBtn.textContent = "Untag";
+            untagBtn.addEventListener("click", () => untagImage(img, badge, untagBtn));
+            info.appendChild(untagBtn);
+        }
+
         card.appendChild(info);
         imageGrid.appendChild(card);
     }
@@ -178,6 +186,11 @@ async function tagAll() {
                 badge.textContent = "Tagged";
                 img.tagged = true;
                 successCount++;
+                const untagBtn = document.createElement("button");
+                untagBtn.className = "untag-btn";
+                untagBtn.textContent = "Untag";
+                untagBtn.addEventListener("click", () => untagImage(img, badge, untagBtn));
+                card.querySelector(".card-info").appendChild(untagBtn);
             } else if (result.status === "skipped") {
                 badge.className = "badge badge-skipped";
                 badge.textContent = result.message;
@@ -199,4 +212,26 @@ async function tagAll() {
     progressText.textContent = `Done. Tagged ${successCount} of ${untagged.length} images.`;
     tagAllBtn.disabled = false;
     loadBtn.disabled = false;
+}
+
+async function untagImage(img, badge, untagBtn) {
+    untagBtn.disabled = true;
+    try {
+        const resp = await fetch("/api/untag", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ folder: currentFolder, filename: img.filename }),
+        });
+        const result = await resp.json();
+        if (result.status === "success") {
+            img.tagged = false;
+            badge.className = "badge badge-untagged";
+            badge.textContent = "Untagged";
+            untagBtn.remove();
+        } else {
+            untagBtn.disabled = false;
+        }
+    } catch (err) {
+        untagBtn.disabled = false;
+    }
 }

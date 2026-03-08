@@ -183,6 +183,30 @@ progress::-webkit-progress-value {
     color: #842029;
 }
 
+.untag-btn {
+    padding: 3px 10px;
+    font-size: 11px;
+    font-weight: 500;
+    background: none;
+    color: #c0392b;
+    border: 1px solid #c0392b;
+    border-radius: 6px;
+    white-space: nowrap;
+    transition: background 0.15s, color 0.15s;
+}
+
+.untag-btn:hover {
+    background: #c0392b;
+    color: #fff;
+}
+
+.untag-btn:disabled {
+    background: none;
+    color: #d2d2d7;
+    border-color: #d2d2d7;
+    cursor: not-allowed;
+}
+
 .error {
     color: #842029;
     padding: 16px;

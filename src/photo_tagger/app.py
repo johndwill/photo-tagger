@@ -172,6 +172,31 @@ def api_tag_image():
         )
 
 
+@app.route("/api/untag", methods=["POST"])
+def api_untag_image():
+    """Delete the tagged version of a single image.
+
+    JSON body: {"folder": "/absolute/path", "filename": "IMG_001.jpg"}
+    """
+    data = request.get_json()
+    if not data or "folder" not in data or "filename" not in data:
+        return jsonify({"error": "Missing folder or filename"}), 400
+
+    folder = Path(data["folder"])
+    filename = data["filename"]
+    image_path = folder / filename
+
+    p = Path(image_path)
+    tagged_file = folder / "tagged" / f"{p.stem}_tagged.png"
+
+    if not tagged_file.exists():
+        return jsonify({"filename": filename, "status": "not_found", "message": "No tagged file found"}), 404
+
+    tagged_file.unlink()
+    logger.info("Removed tagged file: %s", tagged_file)
+    return jsonify({"filename": filename, "status": "success", "message": "Tag removed"})
+
+
 def main():
     """Entry point for running the Flask dev server."""
     logging.basicConfig(
